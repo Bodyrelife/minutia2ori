@@ -1,0 +1,123 @@
+er_test: 0.926160 er_precise: 0.790884
+er_test: 0.926207 er_recall: 0.695341 er_precise: 0.771453 P+R: 1.466794 09-Jun-2015 22:42:12
+er_test: 0.924583 er_recall: 0.732573 er_precise: 0.743848 P+R: 1.476421 10-Jun-2015 09:27:25 lenet13_iter_1w
+er_test: 0.918055 er_recall: 0.782164 er_precise: 0.698151 P+R: 1.480314 10-Jun-2015 18:22:15 lenet13_iter_2w
+er_test: 0.918055 er_recall: 0.782164 er_precise: 0.698151 P+R: 1.480314 11-Jun-2015 13:30:36
+er_test: 0.920672 er_recall: 0.774045 er_precise: 0.710432 P+R: 1.484477 12-Jun-2015 18:57:42
+er_test: 0.920672 er_recall: 0.774045 er_precise: 0.710432 P+R: 1.484477 30-Jun-2015 01:18:02
+er_test: 0.922038 er_recall: 0.754409 er_precise: 0.723535 P+R: 1.477944 30-Jun-2015 01:30:06
+er_test: 0.922038 er_recall: 0.754409 er_precise: 0.723535 P+R: 1.477944 30-Jun-2015 01:30:28
+er_test: 0.922038 er_recall: 0.754409 er_precise: 0.723535 P+R: 1.477944 30-Jun-2015 01:31:53
+er_test: 0.922038 er_recall: 0.754409 er_precise: 0.723535 P+R: 1.477944 30-Jun-2015 01:32:06
+er_test: 0.990423 er_recall: 0.748170 er_precise: 0.980452 P+R: 1.728622 30-Jun-2015 02:09:18
+er_test: 0.990423 er_recall: 0.847974 er_precise: 0.980452 P+R: 1.828426 30-Jun-2015 16:33:57
+er_test: 0.990423 er_recall: 0.847974 er_precise: 0.980452 P+R: 1.828426 30-Jun-2015 22:34:30
+er_test: 0.920672 er_recall: 0.877300 er_precise: 0.710432 P+R: 1.587732 30-Jun-2015 22:45:39
+er_test: 0.990423 er_recall: 0.847974 er_precise: 0.980452 P+R: 1.828426 30-Jun-2015 22:46:28
+er_test: 0.990423 er_recall: 0.847974 er_precise: 0.980452 P+R: 1.828426 01-Jul-2015 09:06:57
+er_test: 0.941508 er_recall: 0.066874 er_precise: 0.560285 P+R: 0.627159 17-Jul-2015 23:48:57
+er_test: 0.941878 er_recall: 0.071391 er_precise: 0.558242 P+R: 0.629633 19-Jul-2015 15:41:20
+er_test: 0.941878 er_recall: 0.071391 er_precise: 0.558242 P+R: 0.629633 19-Jul-2015 15:43:04
+er_test: 0.925674 er_recall: 0.078460 er_precise: 0.477911 P+R: 0.556371 20-Jul-2015 00:12:29
+er_test: 0.925674 er_recall: 0.631452 er_precise: 0.477911 P+R: 1.109363 20-Jul-2015 16:57:01 1:3m
+er_test: 0.941878 er_recall: 0.574561 er_precise: 0.558242 P+R: 1.132803 20-Jul-2015 16:58:55 1:3
+er_test: 0.954340 er_recall: 0.472803 er_precise: 0.686593 P+R: 1.159396 21-Jul-2015 19:03:38 all
+er_test: 0.935840 er_recall: 0.505273 er_precise: 0.527933 P+R: 1.033206 26-Jul-2015 18:07:45 1:3all iter20w
+er_test: 0.944001 er_recall: 0.504163 er_precise: 0.582701 P+R: 1.086864 27-Jul-2015 17:50:14 1:3all STFT20w
+er_test: 0.946856 er_recall: 0.500833 er_precise: 0.605593 P+R: 1.106425 28-Jul-2015 00:21:34 1:3all iter8w
+er_test: 0.940184 er_recall: 0.565957 er_precise: 0.549044 P+R: 1.115002 28-Jul-2015 15:33:02 1:3all STFT8w
+er_test: 0.956233 er_recall: 0.461887 er_precise: 0.714920 P+R: 1.176807 28-Jul-2015 16:18:47 all STFT
+er_test: 0.939507 er_recall: 0.793416 er_precise: 0.814327 P+R: 1.607744 17-Sep-2015 18:10:15 palm newall
+er_test: 0.931405 er_recall: 0.811676 er_precise: 0.771974 P+R: 1.583650 19-Sep-2015 15:50:16 palm new13
+er_test: 0.936696 er_recall: 0.806814 er_precise: 0.794735 P+R: 1.601550 19-Sep-2015 16:08:14 palm finetune all
+er_test: 0.940017 er_recall: 0.800908 er_precise: 0.811665 P+R: 1.612573 20-Sep-2015 18:43:31 step1 18w
+er_test: 0.939097 er_recall: 0.806238 er_precise: 0.804615 P+R: 1.610853 20-Sep-2015 18:43:38 step2 32w
+er_test: 0.938731 er_recall: 0.806022 er_precise: 0.803273 P+R: 1.609295 24-Sep-2015 16:43:48 step2 60w
+er_test: 0.952643 er_recall: 0.000000 er_precise: NaN P+R: NaN 03-Nov-2015 20:39:24 newdata8w
+er_test: 0.952643 er_recall: 0.000000 er_precise: NaN P+R: NaN 03-Nov-2015 21:45:30 newdata18w
+er_test: 0.952643 er_recall: 0.000000 er_precise: NaN P+R: NaN 03-Nov-2015 21:46:23 newdataconv115w
+er_test: 0.924365 er_recall: 0.067160 er_precise: 0.105738 P+R: 0.172898 03-Nov-2015 21:47:10 newdataoldnet
+er_test: 0.949033 er_recall: 0.010176 er_precise: 0.120746 P+R: 0.130922 10-Nov-2015 23:58:02 newdatanewpic1:3
+er_test: 0.946229 er_recall: 0.719149 er_precise: 0.463400 P+R: 1.182549 11-Nov-2015 08:40:35 olddatanewpic1:3
+er_test: 0.966390 er_recall: 0.438575 er_precise: 0.692117 P+R: 1.130692 13-Nov-2015 14:45:51 olddatanewpicall 15025
+er_test: 0.968228 er_recall: 0.503700 er_precise: 0.688717 P+R: 1.192418 13-Nov-2015 15:56:22 olddatanewpicall lr0.01wd0.0005
+er_test: 0.966186 er_recall: 0.430805 er_precise: 0.692903 P+R: 1.123708 13-Nov-2015 18:10:37 olddatanewpicall lr0.02wd0.0025
+er_test: 0.966771 er_recall: 0.445421 er_precise: 0.695307 P+R: 1.140728 13-Nov-2015 23:45:09 olddatanewpicall 15025b2
+er_test: 0.966290 er_recall: 0.407031 er_precise: 0.711169 P+R: 1.118199 14-Nov-2015 00:36:14 olddatanewpicall s15025b2a
+er_test: 0.965335 er_recall: 0.409343 er_precise: 0.689252 P+R: 1.098595 14-Nov-2015 01:26:31 olddatanewpicall s15025b2
+er_test: 0.967549 er_recall: 0.482516 er_precise: 0.688308 P+R: 1.170824 14-Nov-2015 12:01:48 olddatanewpicall 1.5 5 1.5 5 1.5 1
+er_test: 0.966959 er_recall: 0.465495 er_precise: 0.687150 P+R: 1.152645 14-Nov-2015 12:03:10 olddatanewpicall 1.3 10 1.3 10 1.3 1
+er_test: 0.967340 er_recall: 0.470583 er_precise: 0.691168 P+R: 1.161751 14-Nov-2015 15:52:08 olddatanewpicall 1.5 5 1.5 5 1.3 1
+er_test: 0.967168 er_recall: 0.476873 er_precise: 0.684686 P+R: 1.161559 15-Nov-2015 13:38:10 olddatanewpicall lr0.005
+er_test: 0.965914 er_recall: 0.428492 er_precise: 0.688978 P+R: 1.117470 15-Nov-2015 13:38:44 olddatanewpicall inv
+er_test: 0.967304 er_recall: 0.482794 er_precise: 0.683921 P+R: 1.166715 15-Nov-2015 13:39:08 olddatanewpicall 15515511
+er_test: 0.967293 er_recall: 0.480481 er_precise: 0.684953 P+R: 1.165434 15-Nov-2015 13:39:36 olddatanewpicall 155155131
+er_test: 0.967883 er_recall: 0.470490 er_precise: 0.701130 P+R: 1.171621 16-Nov-2015 13:07:41 olddatanewpicall 155155151he
+er_test: 0.662084 er_recall: 0.573358 er_precise: 0.091112 P+R: 0.664470 16-Nov-2015 13:08:09 !!!!wrong deploy.prototxt
+er_test: 0.967779 er_recall: 0.490657 er_precise: 0.687938 P+R: 1.178595 16-Nov-2015 14:00:53 olddatanewpicall fix12
+er_test: 0.968395 er_recall: 0.480389 er_precise: 0.704613 P+R: 1.185002 16-Nov-2015 14:49:32 olddatanewpicall fine12
+er_test: 0.968526 er_recall: 0.477151 er_precise: 0.709003 P+R: 1.186154 16-Nov-2015 18:58:32 olddatanewpicall fine12lr0.015
+er_test: 0.968536 er_recall: 0.502220 er_precise: 0.694690 P+R: 1.196910 17-Nov-2015 00:15:43 olddatanewpicall finel2lr0.02
+er_test: 0.967356 er_recall: 0.479278 er_precise: 0.686680 P+R: 1.165958 17-Nov-2015 12:26:37 olddatanewpicall 135135131 5w
+er_test: 0.967920 er_recall: 0.491952 er_precise: 0.689664 P+R: 1.181616 17-Nov-2015 12:28:02 133133131 4.7w
+er_test: 0.968280 er_recall: 0.505458 er_precise: 0.688682 P+R: 1.194139 17-Nov-2015 12:30:33 olddatanewpicall fine12lr0.015 4.9w
+er_test: 0.965549 er_recall: 0.598335 er_precise: 0.618060 P+R: 1.216395 17-Nov-2015 12:55:39 1:10 fine12lr0.02 5w
+er_test: 0.967382 er_recall: 0.555134 er_precise: 0.653704 P+R: 1.208838 17-Nov-2015 12:56:38 1:10 fine12lr0.02 1w
+er_test: 0.965538 er_recall: 0.597410 er_precise: 0.618168 P+R: 1.215578 17-Nov-2015 23:20:30 1:10 fine12lr0.02 7.4w
+er_test: 0.965779 er_recall: 0.585014 er_precise: 0.624099 P+R: 1.209113 18-Nov-2015 09:19:43 1:10 155155151he 7w
+er_test: 0.939823 er_recall: 0.800007 er_precise: 0.811434 P+R: 1.611441 18-Nov-2015 16:06:55
+er_test: 0.938278 er_recall: 0.787654 er_precise: 0.812890 P+R: 1.600544 19-Nov-2015 14:03:11 155155256
+er_test: 0.939378 er_recall: 0.791544 er_precise: 0.814996 P+R: 1.606540 19-Nov-2015 14:03:59 155155151256
+er_test: 0.939212 er_recall: 0.792480 er_precise: 0.813697 P+R: 1.606177 19-Nov-2015 14:04:17 155155151
+er_test: 0.939902 er_recall: 0.801988 er_precise: 0.810512 P+R: 1.612500 19-Nov-2015 15:16:50 fine
+er_test: 0.939119 er_recall: 0.794353 er_precise: 0.812106 P+R: 1.606459 20-Nov-2015 15:47:16 155155151256norm
+er_test: 0.939636 er_recall: 0.791292 er_precise: 0.816250 P+R: 1.607541 20-Nov-2015 15:48:01 155155151128
+er_test: 0.939565 er_recall: 0.789203 er_precise: 0.817314 P+R: 1.606516 20-Nov-2015 15:48:34 15515515164norm
+er_test: 0.939033 er_recall: 0.786393 er_precise: 0.816903 P+R: 1.603296 20-Nov-2015 15:49:14 155155151halfc64norm
+er_test: 0.936876 er_recall: 0.774797 er_precise: 0.815350 P+R: 1.590146 20-Nov-2015 15:49:59 8161632
+er_test: 0.931075 er_recall: 0.739682 er_precise: 0.813644 P+R: 1.553326 20-Nov-2015 15:50:59 481616
+er_test: 0.939406 er_recall: 0.791796 er_precise: 0.814954 P+R: 1.606749 22-Nov-2015 19:12:51 3264128128norm
+er_test: 0.936912 er_recall: 0.779370 er_precise: 0.812495 P+R: 1.591866 22-Nov-2015 19:13:34 3264128128norm_15025
+er_test: 0.940211 er_recall: 0.800619 er_precise: 0.812649 P+R: 1.613268 22-Nov-2015 19:14:27 64128256128_fine
+er_test: 0.936840 er_recall: 0.776993 er_precise: 0.813745 P+R: 1.590738 23-Nov-2015 18:16:12 6412825664_fine
+er_test: 0.936747 er_recall: 0.775841 er_precise: 0.814104 P+R: 1.589945 23-Nov-2015 18:16:18 6412825632_fine
+er_test: 0.936797 er_recall: 0.772167 er_precise: 0.816762 P+R: 1.588929 23-Nov-2015 18:16:21 6412825616_fine
+er_test: 0.930047 er_recall: 0.778974 er_precise: 0.784598 P+R: 1.563572 23-Nov-2015 18:16:24 641282568_fine
+er_test: 0.935115 er_recall: 0.769898 er_precise: 0.811025 P+R: 1.580924 24-Nov-2015 19:03:22 6412825664_fines
+er_test: 0.936804 er_recall: 0.776813 er_precise: 0.813710 P+R: 1.590523 24-Nov-2015 19:04:39 6412812864_fine
+er_test: 0.964050 er_recall: 0.549399 er_precise: 0.612647 P+R: 1.162046 29-Nov-2015 18:19:38 finger_noise
+er_test: 0.831427 er_recall: 0.786523 er_precise: 0.810217 P+R: 1.596740 29-Nov-2015 18:22:43 fvc_fine
+er_test: 0.965549 er_recall: 0.513506 er_precise: 0.643147 P+R: 1.156653 29-Nov-2015 19:13:18
+er_test: 0.961966 er_recall: 0.580204 er_precise: 0.582954 P+R: 1.163157 01-Dec-2015 22:50:44 finger_noise_2w
+er_test: 0.932793 er_recall: 0.788410 er_precise: 0.790032 P+R: 1.578442 01-Dec-2015 23:10:42 8163264_1:3_lr0.02
+er_test: 0.940211 er_recall: 0.800619 er_precise: 0.812649 P+R: 1.613268 01-Dec-2015 23:57:09 delete
+er_test: 0.935287 er_recall: 0.811820 er_precise: 0.786442 P+R: 1.598262 06-Dec-2015 02:18:38 1:3 163263128 155155151 lr0.015
+er_test: 0.896051 er_recall: 0.865123 er_precise: 0.647816 P+R: 1.512938 15-Dec-2015 22:40:31 163264128 210
+er_test: 0.888733 er_recall: 0.860009 er_precise: 0.631486 P+R: 1.491494 15-Dec-2015 22:43:57 3264128128 210
+er_test: 0.886217 er_recall: 0.862062 er_precise: 0.625320 P+R: 1.487382 16-Dec-2015 01:53:00 163264- 210
+er_test: 0.889668 er_recall: 0.767715 er_precise: 0.289618 P+R: 1.057333 29-Dec-2015 20:14:43 163264128 210
+er_test: 0.875932 er_recall: 0.755412 er_precise: 0.263258 P+R: 1.018670 29-Dec-2015 20:16:12 64128256512 210
+er_test: 0.888723 er_recall: 0.776596 er_precise: 0.289204 P+R: 1.065799 29-Dec-2015 20:17:27 163264128fine 210
+er_test: 0.884434 er_recall: 0.853706 er_precise: 0.622773 P+R: 1.476479 30-Dec-2015 09:19:15 weightloss 1:1 210 3264128128
+er_test: 0.938364 er_recall: 0.803032 er_precise: 0.803611 P+R: 1.606644 30-Dec-2015 09:23:33 weightloss all 210
+er_test: 0.888237 er_recall: 0.765495 er_precise: 0.285867 P+R: 1.051362 02-Jan-2016 15:15:12 1:1 cnnstft 210
+er_test: 0.967494 er_recall: 0.544403 er_precise: 0.657542 P+R: 1.201945 02-Jan-2016 17:15:39 1:1 cnnstft oldnet 210
+er_test: 0.965025 er_recall: 0.566420 er_precise: 0.618485 P+R: 1.184905 04-Jan-2016 01:09:04 1:10 cnnstft 1525
+er_test: 0.966088 er_recall: 0.587974 er_precise: 0.625467 P+R: 1.213441 04-Jan-2016 20:11:36 1:10 cnnstft 210
+er_test: 0.939184 er_recall: 0.796334 er_precise: 0.811115 P+R: 1.607449 04-Jan-2016 22:05:22 weightloss10 210
+er_test: 0.938479 er_recall: 0.792048 er_precise: 0.810914 P+R: 1.602962 04-Jan-2016 22:22:54 weightloss10s 210
+er_test: 0.938422 er_recall: 0.789779 er_precise: 0.812125 P+R: 1.601904 04-Jan-2016 23:29:51 weightloss10s 155155151
+er_test: 0.959780 er_recall: 0.165957 er_precise: 0.797688 P+R: 0.963645 05-Jan-2016 00:12:28 combine (max1.182)
+er_test: 0.965779 er_recall: 0.585014 er_precise: 0.624099 P+R: 1.209113 05-Jan-2016 02:13:36 oldnewdataall1:10 155155151
+er_test: 0.938572 er_recall: 0.789851 er_precise: 0.812711 P+R: 1.602562 05-Jan-2016 02:47:05 weightloss20s 155155151
+er_test: 0.966005 er_recall: 0.581221 er_precise: 0.626296 P+R: 1.207517 05-Jan-2016 02:51:30 1:10 cnnstft 155155151
+er_test: 0.938860 er_recall: 0.793344 er_precise: 0.811673 P+R: 1.605018 05-Jan-2016 22:46:41 weightloss1.5 155155151
+er_test: 0.966187 er_recall: 0.581129 er_precise: 0.628514 P+R: 1.209643 06-Jan-2016 00:00:24 1:10 cnnstft fine
+er_test: 0.938903 er_recall: 0.792192 er_precise: 0.812590 P+R: 1.604782 06-Jan-2016 00:38:25 weightloss2 155155151
+er_test: 0.966390 er_recall: 0.585846 er_precise: 0.631154 P+R: 1.217000 06-Jan-2016 01:17:34 weightloss1.5 1:10 155155151
+er_test: 0.956077 er_recall: 0.497544 er_precise: 0.195314 P+R: 0.692858 12-Jan-2016 19:35:27 NIST fine 1w
+er_test: 0.987773 er_recall: 0.350963 er_precise: 0.562689 P+R: 0.913653 12-Jan-2016 19:50:21 NIST weightloss
+er_test: 0.974818 er_recall: 0.405365 er_precise: 0.289765 P+R: 0.695130 12-Jan-2016 20:37:49 NIST fine 10w
+er_test: 0.969883 er_recall: 0.449188 er_precise: 0.258086 P+R: 0.707273 13-Jan-2016 09:13:23 NIST fine weightloss 1.65w
+er_test: 0.969921 er_recall: 0.527382 er_precise: 0.702440 P+R: 1.229822 14-Jan-2016 12:35:51 dr_50 finger
+er_test: 0.989667 er_recall: 0.281451 er_precise: 0.726829 P+R: 1.008280 14-Jan-2016 18:52:32 nist dr_50

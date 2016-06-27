@@ -1,0 +1,42 @@
+opts:
+      cache_name: 'faster_rcnn_274205_VGG16_top-1_nms0_6_top200_sta...'
+            conf: [1x1 struct]
+    ignore_cache: 0
+            imdb: {1x129 cell}
+            iter: 2
+    net_def_file: '/media/ssd2/tangy/faster_rcnn-master-hd/models/f...'
+        net_file: '/media/ssd2/tangy/faster_rcnn-master-hd/output/f...'
+           roidb: {{1x129 cell}}
+          suffix: ''
+
+conf:
+       batch_size: 128
+      bbox_thresh: 15
+     bg_thresh_hi: Inf
+     bg_thresh_lo: 15
+      fg_fraction: 0.2500
+        fg_thresh: 15
+      image_means: [1x1x3 single]
+    ims_per_batch: 2
+         max_size: 1000
+         rng_seed: 6
+           scales: 800
+      test_binary: 0
+    test_max_size: 1000
+         test_nms: 0.3000
+      test_scales: 800
+      use_flipped: 1
+          use_gpu: 1
+
+{Operation terminated by user during <a href="matlab:helpUtils.errorDocCallback('TY_fast_rcnn_im_detect', '/media/ssd2/tangy/faster_rcnn-master-hd/functions/fast_rcnn/TY_fast_rcnn_im_detect.m', 27)" style="font-weight:bold">TY_fast_rcnn_im_detect</a> (<a href="matlab: opentoline('/media/ssd2/tangy/faster_rcnn-master-hd/functions/fast_rcnn/TY_fast_rcnn_im_detect.m',27,0)">line 27</a>)
+
+
+In <a href="matlab:helpUtils.errorDocCallback('TY_fast_rcnn_test', '/media/ssd2/tangy/faster_rcnn-master-hd/functions/fast_rcnn/TY_fast_rcnn_test.m', 111)" style="font-weight:bold">TY_fast_rcnn_test</a> (<a href="matlab: opentoline('/media/ssd2/tangy/faster_rcnn-master-hd/functions/fast_rcnn/TY_fast_rcnn_test.m',111,0)">line 111</a>)
+            [boxes, scores] = TY_fast_rcnn_im_detect(conf, caffe_net,
+            im, imdb{i}.boxes, max_rois_num_in_gpu);
+
+In <a href="matlab:helpUtils.errorDocCallback('Faster_RCNN_Train.TY_do_fast_rcnn_test', '/media/ssd2/tangy/faster_rcnn-master-hd/experiments/+Faster_RCNN_Train/TY_do_fast_rcnn_test.m', 6)" style="font-weight:bold">Faster_RCNN_Train.TY_do_fast_rcnn_test</a> (<a href="matlab: opentoline('/media/ssd2/tangy/faster_rcnn-master-hd/experiments/+Faster_RCNN_Train/TY_do_fast_rcnn_test.m',6,0)">line 6</a>)
+    mAP                         = TY_fast_rcnn_test(conf, imdb{1},
+    roidb, ...
+} 
+Faster_RCNN_Train.TY_do_fast_rcnn_test(conf_fast_rcnn, model.stage2_fast_rcnn, dataset.imdb_test, dataset.roidb_test,2);
