@@ -96,9 +96,11 @@ function save_model_path = TY_proposal_train(conf, imdb_train, roidb_train, vara
     trainlenth = length(opts.imdb_train{1});
     image_roidb_train = {opts.imdb_train{1}{1:floor(trainlenth*4/5)}};
     image_roidb_val   = {opts.imdb_train{1}{floor(trainlenth*4/5)+1:end}};
-    [image_roidb_train, bbox_means, bbox_stds] = TY_proposal_prepare_image_roidb(conf, image_roidb_train);
+%     [image_roidb_train, bbox_means, bbox_stds] = Prepare_image(conf, image_roidb_train);
+    bbox_means = 128;
+    bbox_stds = 1;
     if opts.do_val
-        [image_roidb_val] = TY_proposal_prepare_image_roidb(conf, image_roidb_val, bbox_means, bbox_stds);
+%         [image_roidb_val] = Prepare_image(conf, image_roidb_val, bbox_means, bbox_stds);
 
         % fix validation data
         shuffled_inds_val   = generate_random_minibatch([], image_roidb_val, conf.ims_per_batch);
@@ -116,7 +118,7 @@ function save_model_path = TY_proposal_train(conf, imdb_train, roidb_train, vara
 %      
 %% -------------------- Training -------------------- 
 
-    proposal_generate_minibatch_fun = @TY_proposal_generate_minibatch;
+    proposal_generate_minibatch_fun = @Generate_minibatch;
     visual_debug_fun                = @proposal_visual_debug;
 
     % training
@@ -139,7 +141,7 @@ function save_model_path = TY_proposal_train(conf, imdb_train, roidb_train, vara
         caffe_solver.net.set_input_data(net_inputs);
         caffe_solver.step(1);
         rst = caffe_solver.net.get_output();
-        rst = check_error(rst, caffe_solver);
+%         rst = check_error(rst, caffe_solver);
         train_results = parse_rst(train_results, rst);
         % check_loss(rst, caffe_solver, net_inputs);
 
@@ -194,7 +196,7 @@ function val_results = do_validation(conf, caffe_solver, proposal_generate_minib
 
         caffe_solver.net.forward(net_inputs);
         rst = caffe_solver.net.get_output();
-        rst = check_error(rst, caffe_solver);  
+%         rst = check_error(rst, caffe_solver);  
         val_results = parse_rst(val_results, rst);
     end
 end
@@ -292,7 +294,7 @@ function model_path = snapshot(conf, caffe_solver, bbox_means, bbox_stds, cache_
     bbox_means_flatten = repmat(reshape(bbox_means', [], 1), anchor_size, 1);
     
     % merge bbox_means, bbox_stds into the model
-    bbox_pred_layer_name = 'proposal_bbox_pred';
+    bbox_pred_layer_name = 'proposal_cls_score';
     weights = caffe_solver.net.params(bbox_pred_layer_name, 1).get_data();
     biase = caffe_solver.net.params(bbox_pred_layer_name, 2).get_data();
     weights_back = weights;
@@ -317,15 +319,9 @@ end
 
 function show_state(iter, train_results, val_results)
     fprintf('\n------------------------- Iteration %d -------------------------\n', iter);
-    fprintf('Training : err_fg %.3g, err_bg %.3g, loss (cls %.3g + reg %.3g)\n', ...
-        1 - mean(train_results.accuracy_fg.data), 1 - mean(train_results.accuracy_bg.data), ...
-        mean(train_results.loss_cls.data), ...
-        mean(train_results.loss_bbox.data));
+    fprintf('Training : loss %.3g\n',mean(train_results.loss_cls.data));
     if exist('val_results', 'var') && ~isempty(val_results)
-        fprintf('Testing  : err_fg %.3g, err_bg %.3g, loss (cls %.3g + reg %.3g)\n', ...
-            1 - mean(val_results.accuracy_fg.data), 1 - mean(val_results.accuracy_bg.data), ...
-            mean(val_results.loss_cls.data), ...
-            mean(val_results.loss_bbox.data));
+        fprintf('Testing  : loss %.3g\n', mean(val_results.loss_cls.data));
     end
 end
 

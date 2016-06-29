@@ -1,51 +1,84 @@
 function minutia2ori()
 clear all
-
-mifile = fopen('/media/ssd2/tangy/FVC/FVC2002/DB2_A_mnt/1_1.mnt');
-fscanf(mifile,'%s',1)
-numm = fscanf(mifile,'%d',3);
-Minutia = zeros(numm(1),3);
-for i = 1:numm(1)
-    Minutia(i,:) = fscanf(mifile,'%f',3);
-end
-fclose(mifile);
-Img = imread('/media/ssd2/tangy/FVC/FVC2002/DB2_A/1_1.bmp');
+% input_dir = 'D:\work\FVC2002\DB2_A_mnt\';
+% output_dir = 'D:\work\FVC2002\DB2_A_m2o\';
+% mkdir(output_dir);
+% Files = dir('D:\work\FVC2002\DB2_A_mnt\*.mnt');
+input_dir = 'D:\work\DataBase\data_finger\';
+output_dir = 'D:\work\DataBase\latent_m2o\';
+mkdir(output_dir);
+Files = dir('D:\work\DataBase\data_finger\*.mnt');
+for k = 1:length(Files)
+    image_path = [input_dir,Files(k).name(1:end-4),'.bmp'];
+    mnt_path = [input_dir,Files(k).name];
+    mifile = fopen(mnt_path);
+    fscanf(mifile,'%s',1)
+    numm = fscanf(mifile,'%d',3);
+    Minutia = zeros(numm(1),3);
+    for i = 1:numm(1)
+        Minutia(i,:) = fscanf(mifile,'%f',3);
+%         fscanf(mifile,'%f',2);
+    end
+    fclose(mifile);
+    Img = imread(image_path);
+% imshow(Img);
 % for k = 1:length(dataset.imdb_train{1})
 %     Filename = dataset.imdb_train{1}{k}.image_path;
 %     Img  = imread(Filename);
 %     Minutia = dataset.imdb_train{1}{k}.boxes;
-%     Minutia=[200 200 pi/3; 400 400 pi*3/4; 50 300 pi/2; 150 250 pi*1.7]
+    Minutia=[200 200 pi/3; 400 400 pi*3/4; 50 300 pi/2; 150 250 pi*1.7]
 %     Minutia=[200 200 pi/3]
-    Minutia=[200 200 pi/3; 400 400 pi/6]
+%     Minutia=[200 200 pi/3; 400 400 pi/4]
     oimg_syn = minutia_to_orientation(Minutia);
-    oimg_syn = oimg_syn.';
     oimg_syn(size(oimg_syn,1)+1:size(Img,1),size(oimg_syn,2)+1:size(Img,2))=0;
+    oimg_syn(size(Img,1)+1:end,:)=[];
+    oimg_syn(:,size(Img,2)+1:end)=[];
+    oimg_syn(1:max(0,min(Minutia(:,2))-16),:)=0;
+    oimg_syn(:,1:max(0,min(Minutia(:,1))-16))=0;
     view_uint8_img(oimg_syn);
-    [oimg,fimg,bwimg,eimg,enhimg]=fft_enhance_cubs(Img);
-    view_orientation_image(oimg);
+    [oimg,fimg,bwimg,eimg,enhimg]=fft_enhance_cubs(oimg_syn);
+%     erode_img = imerode(enhimg,strel('disk',5));
+    enhimg(enhimg>100)=255;
+    enhimg(enhimg<=100)=0;
+%     erode_img = imerode(enhimg,strel('disk',5));
+%     oimg_syn(oimg_syn>100)=255;
+%     oimg_syn(oimg_syn<=100)=0;
+%     view_uint8_img(enhimg);
+    [~,~,~,~,enhimg2]=fft_enhance_cubs(Img);
+%     TY_showboxes(Img,Minutia);
+%     TY_showboxes(enhimg,Minutia);
+%     show_img = [Img,zeros(size(Img,1),10),enhimg];
+%     show_Minutia = [Minutia;[Minutia(:,1)+10+size(Img,2),Minutia(:,2),Minutia(:,3)]];
+    show_img = [Img,zeros(size(Img,1),10),enhimg2,zeros(size(Img,1),10),enhimg];
+    show_Minutia = [Minutia;[Minutia(:,1)+10+size(Img,2),Minutia(:,2),Minutia(:,3)];[Minutia(:,1)+20+2*size(Img,2),Minutia(:,2),Minutia(:,3)]];
+    TY_showboxes(show_img,show_Minutia);
+    print('-dbmp',[output_dir,Files(k).name(1:end-4)]);
+%     TY_showboxes(oimg_syn,Minutia);
+%     view_orientation_image(oimg);
 %     imwrite(enhimg,[outputDir Files(k).name],'bmp');
 % end
+end
 end
 
 function oimg_final = minutia_to_orientation(minutia)
     BLKSZ = 8;
-    minutia(:,3) = atan2(sin(minutia(:,3)),cos(minutia(:,3)));
-%     minH = max(0,min(minutia(:,1))-BLKSZ);
-%     minW = max(0,min(minutia(:,2))-BLKSZ);
-    minH = 0;
-    minW = 0;
-    nHt = max(minutia(:,1))+2*BLKSZ+200;
-    nWt = max(minutia(:,2))+2*BLKSZ+200;
-    nBlkHt = floor(nHt/BLKSZ);
-    nBlkWt = floor(nWt/BLKSZ);
+%     minutia(:,3) = atan2(sin(minutia(:,3)),cos(minutia(:,3)));
+    minW = max(0,min(minutia(:,1))-2*BLKSZ);
+    minH = max(0,min(minutia(:,2))-2*BLKSZ);
+%     minH = 0;
+%     minW = 0;
+    nWt = max(minutia(:,1))+2*BLKSZ;
+    nHt = max(minutia(:,2))+2*BLKSZ;
+    nBlkHt = floor(nHt/BLKSZ)+1;
+    nBlkWt = floor(nWt/BLKSZ)+1;
     minBLKH = floor(minH/BLKSZ);
     minBLKW = floor(minW/BLKSZ);
     oimg = zeros(nBlkHt,nBlkWt);
 %% orientation field
     for i = minBLKH:nBlkHt-1 
         for j = minBLKW:nBlkWt-1
-            eudis = pointdis2([(i+0.5)*BLKSZ,(j+0.5)*BLKSZ],minutia);
-            sectors_loc = minutia(:,1:2)-repmat([(i+0.5)*BLKSZ,(j+0.5)*BLKSZ],size(minutia(:,1)));
+            eudis = pointdis2([(i+0.5)*BLKSZ,(j+0.5)*BLKSZ],[minutia(:,2) minutia(:,1)]);
+            sectors_loc = [minutia(:,2) minutia(:,1)]-repmat([(i+0.5)*BLKSZ,(j+0.5)*BLKSZ],size(minutia(:,1)));
             sectors_angle = angle(sectors_loc(:,1)+1i*sectors_loc(:,2));
             sectors_label = floor(sectors_angle/pi*4)+5; %-4:3 to 1:8
             u=0;
@@ -59,36 +92,46 @@ function oimg_final = minutia_to_orientation(minutia)
                     v=v+sin(2*minutia(pick,3))/eudis(pick);
                 end
             end
-            oimg(i+1,j+1) = 0.5*atan2(v,u);
+            oimg(i+1,j+1) = atan2(v,u);
         end
     end
+    oimg(oimg<0) = oimg(oimg<0)+2*pi;
+    oimg = 0.5*oimg;
     for nn = 1:size(minutia,1)
-        oimg(floor((minutia(nn,1)-1)/BLKSZ)+1,floor((minutia(nn,2)-1)/BLKSZ+1)) = minutia(nn,3);
+        oimg(floor((minutia(nn,2)-1)/BLKSZ)+1,floor((minutia(nn,1)-1)/BLKSZ+1)) = minutia(nn,3);
     end
 %     view_uint8_img(oimg);
     oimg = unwrap(oimg*2,pi,2)/2;
 %     view_uint8_img(oimg);
     oimg = unwrap(oimg*2,pi,1)/2;
-    view_uint8_img(oimg);
+%     view_uint8_img(oimg);
+%     view_orientation_image(oimg);
 %     imshow(uint8((oimg-min(min(oimg)))/(max(max(oimg))-min(min(oimg)))*255));
 %% gradient of continuous phase
+    oimg = ones(nBlkHt,nBlkWt)*1.0472;
     Gradient = 2*pi*0.12*exp(1i*(oimg+pi/2));
     Phase_s = zeros(nHt,nWt);
     [xx,yy] = meshgrid(1:nHt,1:nWt);
     for nn = 1:size(minutia,1)
-        Phase_s = Phase_s+sign(cos(minutia(nn,3)-oimg(floor((minutia(nn,1)-1)/BLKSZ+1),floor((minutia(nn,2)-1)/BLKSZ)+1))+eps).*...
-            atan2((yy-minutia(nn,2)),(xx-minutia(nn,1))).';
+        Pimg = atan2((yy-minutia(nn,1)),(xx-minutia(nn,2))).';
+%         Pimg(Pimg<0) = Pimg(Pimg<0)+2*pi;
+        Phase_s = Phase_s-sign(cos(minutia(nn,3)-oimg(floor((minutia(nn,2)-1)/BLKSZ+1),floor((minutia(nn,1)-1)/BLKSZ)+1))+eps).*Pimg;            
     end
-    [Gradient_s1 , Gradient_s2] = gradient(Phase_s);
-    Gradient_s = Gradient_s1+1i*Gradient_s2;
-    Gradient_sb = zeros(nBlkHt,nBlkWt);
-    Gradient_sb = Gradient_s(BLKSZ/2:BLKSZ:end-BLKSZ/2,BLKSZ/2:BLKSZ:end-BLKSZ/2);
+%     [Gradient_s1 , Gradient_s2] = gradient(Phase_s);
+%     Gradient_s = Gradient_s1+1i*Gradient_s2;
+%     Gradient_sb = zeros(nBlkHt,nBlkWt);
+%     Gradient_sb = Gradient_s(BLKSZ/2:BLKSZ:end-BLKSZ/2,BLKSZ/2:BLKSZ:end-BLKSZ/2);
+
+
 %     for i = minBLKH:nBlkHt-1 
 %         for j = minBLKW:nBlkWt-1
 %             Gradient_sb(i+1,j+1) = mean(mean(Gradient_s(i*BLKSZ+1:i*BLKSZ+BLKSZ,j*BLKSZ+1:j*BLKSZ+BLKSZ)));
 %         end
 %     end
-    Gradient_c = Gradient - Gradient_sb;
+
+%     Gradient_c = Gradient - 2*pi*0.12*Gradient_sb;
+    Gradient_c = Gradient;
+    
 %     Gradient_ct = zeros(nBlkHt+2,nBlkWt+2);
 %     Gradient_ct(2:nBlkHt+1,2:nBlkWt+1) = Gradient_c;
 %     for nn = 1:size(minutia,1)
@@ -96,7 +139,7 @@ function oimg_final = minutia_to_orientation(minutia)
 %         yyy=floor(minutia(nn,2)/BLKSZ)+1+1;
 %         Gradient_c(xxx-1,yyy-1)=mean([Gradient_ct(xxx-1,yyy-1) Gradient_ct(xxx-1,yyy+1) Gradient_ct(xxx+1,yyy-1) Gradient_ct(xxx+1,yyy+1)]);
 %     end 
-    for i=1:1
+    for i=1:3
         Gradient_c = smoothen_gradient_image(Gradient_c);
     end
 %% continous phase
@@ -111,56 +154,58 @@ function oimg_final = minutia_to_orientation(minutia)
     while pointer <= pointend
         phase_sum = zeros(1,1);
         pkkk = 1;
-        pflag = 0;
         for i = 1:4
-            if queueoff(pointer,1)+temp(i,1)>minBLKH && queueoff(pointer,1)+temp(i,1)<nBlkHt && queueoff(pointer,2)+temp(i,2)>minBLKW && queueoff(pointer,2)+temp(i,2)<nBlkWt
+            if queueoff(pointer,1)+temp(i,1)>minBLKH && queueoff(pointer,1)+temp(i,1)<=nBlkHt && queueoff(pointer,2)+temp(i,2)>minBLKW && queueoff(pointer,2)+temp(i,2)<=nBlkWt
                 if countp(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2))==0
                     countp(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2))=1;
                     pointend = pointend+1;
                     queueoff(pointend,:)=[queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2)];
-                end
-                if ~pflag
-                    pflag = 1;
+               else
                     for j = 1:8
                         if temp(i,1)
-                        phase_sum(pkkk) = real(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,1)+temp(i,1)*BLKSZ/2)+...
-                            imag(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,2)-BLKSZ/2+j)-...
-                            real(Gradient_c(queueoff(pointer+1,1),queueoff(pointer+1,2)))*(queueoff(pointer+1,1)+temp(i,1)*BLKSZ/2)-...
-                            imag(Gradient_c(queueoff(pointer+1,1),queueoff(pointer+1,2)))*(queueoff(pointer+1,2)-BLKSZ/2+j)+...
-                            phaseoff(queueoff(pointer,1),queueoff(pointer,2));
+                        phase_sum(pkkk) = imag(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,1)*BLKSZ+temp(i,1)*BLKSZ)+...
+                            real(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,2)*BLKSZ-BLKSZ+j)-...
+                            imag(Gradient_c(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2)))*(queueoff(pointer,1)*BLKSZ+temp(i,1)*BLKSZ)-...
+                            real(Gradient_c(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2)))*(queueoff(pointer,2)*BLKSZ-BLKSZ+j)-...
+                            phaseoff(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2));
                         pkkk = pkkk+1;
                         else
-                        phase_sum(pkkk) = real(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,1)-BLKSZ/2+j)+...
-                            imag(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,2)+temp(i,1)*BLKSZ/2)-...
-                            real(Gradient_c(queueoff(pointer+1,1),queueoff(pointer+1,2)))*(queueoff(pointer+1,1)-BLKSZ/2+j)-...
-                            imag(Gradient_c(queueoff(pointer+1,1),queueoff(pointer+1,2)))*(queueoff(pointer+1,2)+temp(i,1)*BLKSZ/2)+...
-                            phaseoff(queueoff(pointer,1),queueoff(pointer,2));
+                        phase_sum(pkkk) = imag(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,1)*BLKSZ-BLKSZ+j)+...
+                            real(Gradient_c(queueoff(pointer,1),queueoff(pointer,2)))*(queueoff(pointer,2)*BLKSZ+temp(i,2)*BLKSZ)-...
+                            imag(Gradient_c(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2)))*(queueoff(pointer,1)*BLKSZ-BLKSZ+j)-...
+                            real(Gradient_c(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2)))*(queueoff(pointer,2)*BLKSZ+temp(i,2)*BLKSZ)-...
+                            phaseoff(queueoff(pointer,1)+temp(i,1),queueoff(pointer,2)+temp(i,2));
                         pkkk = pkkk+1; 
                         end
                     end
-                    phaseoff(queueoff(pointer+1,:))=atan2(sum(sin(phase_sum)),sum(cos(phase_sum)));
-                    pointer = pointer+1;
                 end
             end
         end 
+        tempphase = atan2(sum(sin(-phase_sum)),sum(cos(-phase_sum)));
+%         tempphase = mean(phase_sum);
+%         if tempphase<0
+%             tempphase = tempphase+2*pi;
+%         end
+        phaseoff(queueoff(pointer,1),queueoff(pointer,2))=tempphase;
+        pointer = pointer+1;
         if pointer==pointend
             queueoff(pointer+1,:)=queueoff(pointer,:);
         end
     end
-    phaseoff = zeros(nBlkHt,nBlkWt);
+%     phaseoff = zeros(nBlkHt,nBlkWt);
     Phase_c = zeros(nHt,nWt);
-    for i=minH:nHt-1-BLKSZ
-        for j=minW:nWt-1-BLKSZ
-            nx = floor((i+1)/BLKSZ)+1;
-            ny = floor((j+1)/BLKSZ)+1;
-            Phase_c(i+1,j+1) = real(Gradient_c(nx,ny))*(i+1)+imag(Gradient_c(nx,ny))*(j+1)+phaseoff(nx,ny);
+    for i=minH:nHt-1
+        for j=minW:nWt-1
+            nx = floor(i/BLKSZ)+1;
+            ny = floor(j/BLKSZ)+1;
+            Phase_c(i+1,j+1) = imag(Gradient_c(nx,ny))*(i+1)+real(Gradient_c(nx,ny))*(j+1)+phaseoff(nx,ny);
 %             Phase_c(i+1,j+1) = real(Gradient_c(nx,ny))+imag(Gradient_c(nx,ny))+phaseoff(nx,ny);
         end
     end
 %% reconstructed fingerprint
     Phase_final = Phase_s + Phase_c;
 %     view_uint8_img(cos(Phase_s));
-    view_uint8_img(cos(Phase_c));
+%     view_uint8_img(cos(Phase_c));
     oimg_final = (cos(Phase_final)+1)/2*255;
 end
 

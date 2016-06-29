@@ -1,4 +1,4 @@
-function [pred_boxes, scores, box_deltas_, anchors_, scores_] = TY_proposal_im_detect(conf, caffe_net, im)
+function [pred_boxes] = TY_proposal_im_detect(conf, caffe_net, im)
 % [pred_boxes, scores, box_deltas_, anchors_, scores_] = proposal_im_detect(conf, im, net_idx)
 % --------------------------------------------------------
 % Faster R-CNN
@@ -30,40 +30,42 @@ function [pred_boxes, scores, box_deltas_, anchors_, scores_] = TY_proposal_im_d
     box_deltas = permute(box_deltas, [3, 2, 1]);
     box_deltas = reshape(box_deltas, 4, [])';
     
-    anchors = proposal_locate_anchors(conf, size(im), conf.test_scales, featuremap_size);
-%     anchors = [-31 -31 32 32];
-%     pred_boxes = anchors;
-    pred_boxes = TY_fast_rcnn_bbox_transform_inv(anchors, box_deltas);
-      % scale back
-    pred_boxes = bsxfun(@times, pred_boxes - 1, ...
-        ([im_size(2), im_size(1), im_size(2), im_size(1)] - 1) ./ ([scaled_im_size(2), scaled_im_size(1), scaled_im_size(2), scaled_im_size(1)] - 1)) + 1;
-%    pred_boxes = clip_boxes(pred_boxes, size(im, 2), size(im, 1));
+    pred_boxes = box_deltas;
     
-    assert(conf.test_binary == false);
-    % use softmax estimated probabilities
-    scores = output_blobs{2}(:, :, end);
-    scores = reshape(scores, size(output_blobs{1}, 1), size(output_blobs{1}, 2), []);
-    % permute from [width, height, channel] to [channel, height, width], where channel is the
-        % fastest dimension
-    scores = permute(scores, [3, 2, 1]);
-    scores = scores(:);
-    
-    box_deltas_ = box_deltas;
-    anchors_ = anchors;
-    scores_ = scores;
-    
-    if conf.test_drop_boxes_runoff_image
-        contained_in_image = is_contain_in_image(anchors, round(size(im) * im_scales));
-        pred_boxes = pred_boxes(contained_in_image, :);
-        scores = scores(contained_in_image, :);
-    end
-    
-    % drop too small boxes
-%     [pred_boxes, scores] = filter_boxes(conf.test_min_box_size, pred_boxes, scores);
-    
-    % sort
-    [scores, scores_ind] = sort(scores, 'descend');
-    pred_boxes = pred_boxes(scores_ind, :);
+%     anchors = proposal_locate_anchors(conf, size(im), conf.test_scales, featuremap_size);
+% %     anchors = [-31 -31 32 32];
+% %     pred_boxes = anchors;
+%     pred_boxes = TY_fast_rcnn_bbox_transform_inv(anchors, box_deltas);
+%       % scale back
+%     pred_boxes = bsxfun(@times, pred_boxes - 1, ...
+%         ([im_size(2), im_size(1), im_size(2), im_size(1)] - 1) ./ ([scaled_im_size(2), scaled_im_size(1), scaled_im_size(2), scaled_im_size(1)] - 1)) + 1;
+% %    pred_boxes = clip_boxes(pred_boxes, size(im, 2), size(im, 1));
+%     
+%     assert(conf.test_binary == false);
+%     % use softmax estimated probabilities
+%     scores = output_blobs{2}(:, :, end);
+%     scores = reshape(scores, size(output_blobs{1}, 1), size(output_blobs{1}, 2), []);
+%     % permute from [width, height, channel] to [channel, height, width], where channel is the
+%         % fastest dimension
+%     scores = permute(scores, [3, 2, 1]);
+%     scores = scores(:);
+%     
+%     box_deltas_ = box_deltas;
+%     anchors_ = anchors;
+%     scores_ = scores;
+%     
+%     if conf.test_drop_boxes_runoff_image
+%         contained_in_image = is_contain_in_image(anchors, round(size(im) * im_scales));
+%         pred_boxes = pred_boxes(contained_in_image, :);
+%         scores = scores(contained_in_image, :);
+%     end
+%     
+%     % drop too small boxes
+% %     [pred_boxes, scores] = filter_boxes(conf.test_min_box_size, pred_boxes, scores);
+%     
+%     % sort
+%     [scores, scores_ind] = sort(scores, 'descend');
+%     pred_boxes = pred_boxes(scores_ind, :);
 end
 
 function [data_blob, rois_blob, im_scale_factors] = get_blobs(conf, im, rois)

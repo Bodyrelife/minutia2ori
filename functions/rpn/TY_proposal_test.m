@@ -76,13 +76,16 @@ function aboxes = TY_proposal_test(conf, imdb, varargin)
             count = count + 1;
 %            fprintf('%s: test (%s) %d/%d ', procid(), imdb_name, count, num_images);
             th = tic;
-            im = imread(imdb{i}.image_path);
-            im = repmat(im,1,1,3);
-            [boxes, scores, abox_deltas{i}, aanchors{i}, ascores{i}] = TY_proposal_im_detect(conf, caffe_net, im);
+    im = zeros(image_roidb.H,image_roidb.W,3);
+    for i = 1:size(image_roidb.boxes,1)
+        im(image_roidb.boxes(i,2),image_roidb.boxes(i,1),:) = image_roidb.boxes(i,3);
+    end
+
+            [boxes] = TY_proposal_im_detect(conf, caffe_net, im);
             
 %            fprintf(' time: %.3fs\n', toc(th));  
             
-            aboxes{i} = [boxes, scores];
+            aboxes{i} = [boxes];
         end    
         save(fullfile(cache_dir, ['proposal_boxes_' imdb_name opts.suffix]), 'aboxes', '-v7.3');
         
