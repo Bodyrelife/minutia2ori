@@ -98,7 +98,7 @@ function save_model_path = TY_proposal_train(conf, imdb_train, roidb_train, vara
     image_roidb_val   = {opts.imdb_train{1}{floor(trainlenth*4/5)+1:end}};
 %     [image_roidb_train, bbox_means, bbox_stds] = Prepare_image(conf, image_roidb_train);
     bbox_means = 128;
-    bbox_stds = 1;
+    bbox_stds = 96;
     if opts.do_val
 %         [image_roidb_val] = Prepare_image(conf, image_roidb_val, bbox_means, bbox_stds);
 

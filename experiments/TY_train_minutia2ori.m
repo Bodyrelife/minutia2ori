@@ -6,7 +6,7 @@ clear is_valid_handle; % to clear init_key
 run(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'startup'));
 %% -------------------- CONFIG --------------------
 opts.caffe_version          = 'caffe_faster_rcnn';
-opts.gpu_id                 = 6;
+opts.gpu_id                 = 2;
 active_caffe_mex(opts.gpu_id, opts.caffe_version);
 
 % do validation, or not 

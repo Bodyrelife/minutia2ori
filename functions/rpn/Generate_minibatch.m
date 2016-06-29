@@ -43,7 +43,7 @@ function [input_blobs, random_scale_inds] = Generate_minibatch(conf, image_roidb
         % permute from [channel, height, width], where channel is the
         % fastest dimension to [width, height, channel]
         labels = imread(image_roidb(i).image_path);
-        labels = labels(1:16:end,1:16:end);
+%         labels = labels(1:16:end,1:16:end);
         labels_blob(1,:,:,:) = labels;
         label_weights_blob = ones(size(labels_blob));
         labels_blob = permute(labels_blob, [3, 2, 1]);
